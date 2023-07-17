@@ -30,18 +30,19 @@ public:
     ~MainWindow();
 //    void recordScreen();
 //    void savePi();
-//    void timeCount(QTimer&);
+    void timeCount(QTimer&);
 //    void settings();
 
 
+    void appear(QList<QPixmap>);
 public slots:
     void on_recordButton_clicked();
 
     void on_pauseButton_clicked();
 
-    void on_saveButton_clicked();
 
-
+private slots:
+    void on_actionsave_as_triggered();
 
 private:
     Ui::MainWindow *ui;
@@ -53,24 +54,24 @@ private:
 //    QReadWriteLock lock;
 
 
-//    QTimer* timer;
-//    QTimer duration;
+    QTimer* timer;
+    QTimer duration;
 
 //   // QScreen *screen;
-//    QList<QPixmap> frames;
+    QList<QPixmap> frames;
 
 //    QMediaCaptureSession session;
 //    QAudioInput audioInput;
 //    QMediaRecorder audioRecorder;
 
 //    int mpcount;
-//    QString outputDir;
-//    QString tempDir;
+    QString outputDir;
+    QString tempDir;
 //    QPoint startPos;
 
-//    int secondCount=0;
-//    int minuteCount=0;
-//    int hourCount=0;
+    int secondCount=0;
+    int minuteCount=0;
+    int hourCount=0;
 
 
 

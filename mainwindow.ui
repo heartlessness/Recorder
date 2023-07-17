@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>943</width>
-    <height>636</height>
+    <height>651</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -28,7 +28,7 @@
      <rect>
       <x>350</x>
       <y>570</y>
-      <width>80</width>
+      <width>28</width>
       <height>24</height>
      </rect>
     </property>
@@ -57,7 +57,7 @@
      <string/>
     </property>
     <property name="icon">
-     <iconset theme="media-playback-start"/>
+     <iconset theme="media-record"/>
     </property>
    </widget>
    <widget class="QPushButton" name="pauseButton">
@@ -65,7 +65,7 @@
      <rect>
       <x>480</x>
       <y>570</y>
-      <width>80</width>
+      <width>28</width>
       <height>24</height>
      </rect>
     </property>
@@ -79,29 +79,7 @@
      <string/>
     </property>
     <property name="icon">
-     <iconset theme="media-playback-pause"/>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="saveButton">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>570</y>
-      <width>80</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="text">
-     <string>save</string>
-    </property>
-    <property name="icon">
-     <iconset theme="multimedia-player"/>
+     <iconset theme="media-playback-stop"/>
     </property>
    </widget>
    <widget class="QWidget" name="recordwidget" native="true">
@@ -154,7 +132,6 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionsave"/>
     <addaction name="actionsave_as"/>
    </widget>
    <addaction name="menuFile"/>

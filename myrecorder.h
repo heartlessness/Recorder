@@ -20,14 +20,15 @@ public:
     explicit MyRecorder(QObject *parent = nullptr);
 
     void recordScreen();
-    void savePi();
-    void timeCount(QTimer&);
-    void settings();
-    void merge();
 
-    QList getFrames();
+    void merge(QString);
+    void pause();
+    void stop();
+
+    QList<QPixmap> getFrames();
 signals:
 
+    void sendPixmap(QList<QPixmap>);
 
 private:
     QReadWriteLock lock;
@@ -36,17 +37,12 @@ private:
     QTimer* timer;
     QTimer duration;
 
-   // QScreen *screen;
+
     QList<QPixmap> frames;
 
     QMediaCaptureSession session;
     QAudioInput audioInput;
     QMediaRecorder audioRecorder;
-
-    int mpcount;
-    QString outputDir;
-//    QString tempDir;
-    QPoint startPos;
 
     int secondCount=0;
     int minuteCount=0;
