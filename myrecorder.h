@@ -12,6 +12,9 @@
 #include <QProcess>
 #include <QFileDialog>
 #include <QMutex>
+#include <atomic>
+
+#include "recorderworker.h"
 
 class MyRecorder : public QObject
 {
@@ -19,18 +22,21 @@ class MyRecorder : public QObject
 public:
     explicit MyRecorder(QObject *parent = nullptr);
 
+
     void recordScreen();
 
     void merge(QString);
     void pause();
     void stop();
 
+    void savePix(QPixmap);
     QList<QPixmap> getFrames();
 signals:
 
-    void sendPixmap(QList<QPixmap>);
+    void sendPixmap(QPixmap);
 
 private:
+
     QReadWriteLock lock;
 
 
@@ -38,7 +44,9 @@ private:
     QTimer duration;
 
 
+    std::atomic<int> countPix=0;
     QList<QPixmap> frames;
+    QMutex mutex;
 
     QMediaCaptureSession session;
     QAudioInput audioInput;

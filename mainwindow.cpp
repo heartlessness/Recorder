@@ -22,8 +22,13 @@ MainWindow::MainWindow(QWidget *parent)
     Buttonlayout->addWidget(ui->pauseButton);
     Buttonlayout->addWidget(ui->recordButton);
 
+
 //    this->layout()->addChildLayout(layout);
 //    this->layout()->addChildLayout(Buttonlayout);
+
+    connect(&worker,&recorderWorker::sendPix,this,&MainWindow::appear);
+
+    connect(&worker,&recorderWorker::sendPix,&recorder,&MyRecorder::savePix);
 
 
 
@@ -33,16 +38,16 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-//    delete timer;
+    delete timer;
     delete imageLabel;
 }
 
-void MainWindow::appear(QList<QPixmap> pix)
+void MainWindow::appear(QPixmap pix)
 {
-    foreach (QPixmap frame,pix) {
-        imageLabel->setPixmap(frame);
+//    foreach (QPixmap frame,pix) {
+        imageLabel->setPixmap(pix);
         imageLabel->setScaledContents(true);
-    }
+//    }
 }
 
 
@@ -50,10 +55,13 @@ void MainWindow::on_recordButton_clicked()
 {
 
     timer=new QTimer;
-    timer->start(30);
-   connect(timer,&QTimer::timeout,[this]{
-       recorder.recordScreen();
-   });
+
+    timer->start(0.003);
+
+    connect(timer,&QTimer::timeout,&worker,&recorderWorker::run);
+
+    //worker.start();
+
 
     //audioRecorder.record();
 
@@ -61,7 +69,7 @@ void MainWindow::on_recordButton_clicked()
 
     duration.start();
     timeCount(duration);
-    connect(&recorder,&MyRecorder::sendPixmap,this,&MainWindow::appear);
+
 
 }
 
@@ -69,7 +77,8 @@ void MainWindow::on_recordButton_clicked()
 void MainWindow::on_pauseButton_clicked()
 {
     timer->stop();
-    recorder.pause();
+    worker.pause();
+    duration.stop();
 
 }
 
@@ -100,7 +109,8 @@ void MainWindow::timeCount(QTimer& time)
 void MainWindow::on_actionsave_as_triggered()
 {
     timer->stop();
-    recorder.stop();
+    worker.stop();
+    duration.stop();
 
     outputDir=QFileDialog::getSaveFileName(nullptr,tr("save file"),QDir::homePath(),".mp4");
 

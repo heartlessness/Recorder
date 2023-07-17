@@ -11,11 +11,13 @@ CONFIG += c++20
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    myrecorder.cpp
+    myrecorder.cpp \
+    recorderworker.cpp
 
 HEADERS += \
     mainwindow.h \
-    myrecorder.h
+    myrecorder.h \
+    recorderworker.h
 
 FORMS += \
     mainwindow.ui

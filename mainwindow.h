@@ -15,6 +15,7 @@
 //#include <QMutex>
 
 #include "myrecorder.h"
+#include "recorderworker.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -34,7 +35,7 @@ public:
 //    void settings();
 
 
-    void appear(QList<QPixmap>);
+    void appear(QPixmap);
 public slots:
     void on_recordButton_clicked();
 
@@ -49,6 +50,7 @@ private:
     QLabel *imageLabel;
 
     MyRecorder recorder;
+    recorderWorker worker;
 
 
 //    QReadWriteLock lock;
