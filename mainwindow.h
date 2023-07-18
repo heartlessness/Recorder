@@ -3,16 +3,6 @@
 
 #include <QMainWindow>
 #include <QThread>
-//#include <QtMultimedia>
-//#include <QScreen>
-//#include <QPixmap>
-//#include <QTimer>
-//#include <QLabel>
-//#include <QVBoxLayout>
-//#include <QFile>
-//#include <QProcess>
-//#include <QFileDialog>
-//#include <QMutex>
 
 #include "myrecorder.h"
 #include "recorderworker.h"
@@ -29,11 +19,10 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-//    void recordScreen();
-//    void savePi();
-    void timeCount(QTimer&);
-//    void settings();
 
+    void timeCount(QTimer&);
+
+    void sliderMove(QTimer&);
 
     void appear(QPixmap);
 public slots:
@@ -52,24 +41,13 @@ private:
     MyRecorder recorder;
     recorderWorker worker;
 
-
-//    QReadWriteLock lock;
-
-
     QTimer* timer;
     QTimer duration;
 
-//   // QScreen *screen;
     QList<QPixmap> frames;
 
-//    QMediaCaptureSession session;
-//    QAudioInput audioInput;
-//    QMediaRecorder audioRecorder;
-
-//    int mpcount;
     QString outputDir;
     QString tempDir;
-//    QPoint startPos;
 
     int secondCount=0;
     int minuteCount=0;

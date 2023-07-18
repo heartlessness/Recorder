@@ -31,8 +31,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&worker,&recorderWorker::sendPix,&recorder,&MyRecorder::savePix);
 
 
-
-
 }
 
 MainWindow::~MainWindow()
@@ -44,10 +42,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::appear(QPixmap pix)
 {
-//    foreach (QPixmap frame,pix) {
         imageLabel->setPixmap(pix);
         imageLabel->setScaledContents(true);
-//    }
 }
 
 
@@ -56,19 +52,19 @@ void MainWindow::on_recordButton_clicked()
 
     timer=new QTimer;
 
-    timer->start(0.003);
+    timer->start(1/30);
 
-    connect(timer,&QTimer::timeout,&worker,&recorderWorker::run);
+    connect(timer,&QTimer::timeout,[this]{
 
-    //worker.start();
+        worker.start();
 
-
-    //audioRecorder.record();
+    });
 
     duration.setInterval(1000);
 
     duration.start();
     timeCount(duration);
+    sliderMove(duration);
 
 
 }
@@ -103,7 +99,14 @@ void MainWindow::timeCount(QTimer& time)
     });
 }
 
-
+void MainWindow::sliderMove(QTimer & timer)
+{
+    connect(&timer,&QTimer::timeout,[this]{
+        int value=ui->horizontalSlider->value();
+        value+=1;
+        ui->horizontalSlider->setValue(value);
+    });
+}
 
 
 void MainWindow::on_actionsave_as_triggered()

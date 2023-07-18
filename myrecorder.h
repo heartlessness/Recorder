@@ -22,9 +22,6 @@ class MyRecorder : public QObject
 public:
     explicit MyRecorder(QObject *parent = nullptr);
 
-
-    void recordScreen();
-
     void merge(QString);
     void pause();
     void stop();
@@ -52,9 +49,6 @@ private:
     QAudioInput audioInput;
     QMediaRecorder audioRecorder;
 
-    int secondCount=0;
-    int minuteCount=0;
-    int hourCount=0;
 };
 
 #endif // MYRECORDER_H
